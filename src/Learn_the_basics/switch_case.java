@@ -1,19 +1,38 @@
 package Learn_the_basics;
-
+import java.util.*;
 
 public class switch_case {
 
 	public static void main(String[] args) {
 			
 		// TODO Auto-generated method stub
+		Scanner s = new Scanner(System.in);
+		
+		ArrayList<Double> arr = new ArrayList<Double>();
+		System.out.println("Press 1 for area\nPress 2 for Rectangle");
+		int choice=s.nextInt();
+		
+		if(choice==1) {
+			for(int i=0;i<1;i++) {
+				double input=s.nextDouble();
+				arr.add(input);
+			}			
+			System.out.println(switchCase(choice,arr)); 
+			
+		}else {
+			for(int i=0;i<=1;i++) {
+				double input=s.nextDouble();
+				arr.add(input);
+			}
+			System.out.println(switchCase(choice,arr)); 
+		}
+		
 
 	}
 
 
 	// User function Template for Java
-
-	class Solution{
-	    static double switchCase(int choice, List<Double> arr){
+	   static double switchCase(int choice, ArrayList<Double> arr){
 	        // code here
 	        switch (choice) {
 	            case 1:
@@ -40,4 +59,4 @@ public class switch_case {
 	    }
 	}
 
-}
+

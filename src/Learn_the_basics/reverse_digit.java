@@ -17,6 +17,6 @@ public class reverse_digit {
             num=(num*10)+digit;
             x /= 10;
         }
-		return nu;
+		return num;
 	}
 }
