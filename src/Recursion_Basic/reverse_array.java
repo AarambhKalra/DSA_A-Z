@@ -8,7 +8,7 @@ public class reverse_array {
 		int start = 0;
         int end = arr.length - 1;  
         
-        reverseArray(arr , start, end);
+        reverseArray(arr , start ,end);
         
         for (int i = 0; i < arr.length; i++) {
             System.out.print(arr[i] + " ");

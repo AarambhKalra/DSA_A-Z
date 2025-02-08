@@ -1,63 +1,27 @@
 package Recursion_Basic;
-
-import java.util.Arrays;
+import java.util.*;
 
 public class palindrome_String {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String s = "abba";
-		s.toLowerCase();
-		s = s.replaceAll("\\s", "");
-		
-		char[] arr = new char[s.length()];
-		
-		for(int i=0;i<arr.length;i++) {
-		      arr[i]=s.charAt(i);
-		}	
-		for(int i=0;i<arr.length;i++) {
-            System.out.print(arr[i]);		
-      }	
-		
-        char[] brr = new char[s.length()];
-		
-		for(int i=0;i<brr.length;i++) {
-		      arr[i]=s.charAt(i);
-		}	
-		
-		
-		reverseArray(arr,1,arr.length-1);
-		
-		for(int i=0;i<arr.length;i++) {
-              System.out.print(arr[i]);		
-        }	
-		
-		System.out.println();
-		
-        if(Arrays.equals(arr, brr)) {
-        	System.out.println(true);;
-        }else {
-        	System.out.println(false);;
-        }
-		
-
+        String s = "race a caraaaaa";
+		s = s.toLowerCase();
+        s = s.replaceAll("[^a-zA-Z0-9]", "");
+		System.out.println(isPalindrome(0,s));
 	}
-	static void reverseArray(char arr[] , int start , int end ){
-
-	         if(start > end ){
-
-	             return;
-
-	         }
-
-	         char temp = arr[start];
-
-	         arr[start] = arr[end];
-
-	         arr[end] = temp ;
-
-	         reverseArray(arr ,  start+1  , end -1 );
-
-	     }
+	public static boolean isPalindrome(int i ,String s) {
+		if(i<=s.length()/2) {
+			return true;
+		}
+		if(s.charAt(i)!=s.charAt(s.length()-i-1)) {
+			return false;
+		}
+		
+		return	isPalindrome(i+1,s);
+			
+		
+        
+	}
 
 }
