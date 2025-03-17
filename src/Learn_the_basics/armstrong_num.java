@@ -6,35 +6,29 @@ public class armstrong_num {
 	public static void main(String[] args) {
 		// Write your code here
 		Scanner s = new Scanner(System.in);
-		int n= s.nextInt();
+		int num= s.nextInt();
 		
-		int ogn = n;
-
-		int k = countDigits(n);
-		
-		int sum=0;
-		
-		for(int i=1;i<=k;i++) {
-			int digit =n%10;
-			sum += (int)Math.pow(digit, k);
-			n=n/10;					
+		int n = length(num);
+		int sum = 0;
+		int ognum = num;
+	    for(int i=1;i<n;i++){
+			int temp = num%10;
+			sum  = sum + (int)Math.pow(temp,n);
+			num/=10;
 		}
-		
-		if(sum==ogn) {
+
+		if(sum == ognum){
 			System.out.println(true);
-		}else {
-			System.out.println(false);
-		}
-		s.close();
-
+		}else System.out.println(false);;
 	}
 
-	static int countDigits(int n){
+	public static int length(int num){
 		int count = 0;
-		while(n>0){
-			n = n/10;
+		while(num>0){	
+			num = num/10;
 			count++;
-		} return count;
-	}
+		}
+		return count;
+	}}
 
-}
+
