@@ -17,7 +17,7 @@ public class min_in_rotated_sorted_array {
             int mid = (low + high) / 2;
 
             // if mid points to the target
-            int temp = arr[mid];
+       //     int temp = arr[mid];
 
 //            ans = Math.min(temp,ans);
 //            System.out.println(ans);
