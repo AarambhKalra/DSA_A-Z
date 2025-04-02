@@ -1,25 +1,14 @@
 package Linked_List;
 
-class Node{
-	int data;
-	Node next;
-	Node prev;
-	
-	Node(int data){
-		this.data=data;
-		this.next=null;
-		this.prev=null;
-	}
-}
+public class doubly {
 
-public class Arr_to_ll {
-	
 	public static Node convert(int[] arr) {
 		Node head = new Node(arr[0]);
 		Node mover = head;
 		
 		for(int i=1;i<arr.length;i++) {
 			Node temp = new Node(arr[i]);
+			temp.prev=mover;
 			mover.next=temp;
 			mover = temp;
 		}
@@ -60,10 +49,11 @@ public class Arr_to_ll {
 	
 	public static Node deleteHead(Node head) {
 		
-		if(head==null) return null;
+		if(head==null || head.next==null) return null;
 		
 		Node temp = head;
 		head = head.next;
+		head.prev = null;
 		temp.next=null;
 		
 		
@@ -78,7 +68,9 @@ public class Arr_to_ll {
 		while(temp.next.next!=null) {
 			temp = temp.next;
 		}
+		temp.next.prev = null;
 		temp.next = null;
+		
 		
 		return head;
 	}
@@ -89,21 +81,38 @@ public class Arr_to_ll {
 		
 		if(k==1) {
 			head=head.next;
+			head.prev=null;
 			return head;
 		}
 		int cnt = 0;
 		Node temp = head;
-		Node prev = null;
 		while(temp!=null) {
 			cnt++;
-			if(cnt==k-1) {
-				temp.next=temp.next.next;
-				//prev.next=prev.next.next;
+			if(cnt==k) {
 				break;
 			}
-			prev = temp;
 			temp = temp.next;
 		}
+		    Node back = temp.prev;
+			Node front = temp.next;
+			
+			if(back==null&&front==null) {
+				return null;
+			}else if(back == null) {
+				head = temp.next;
+				front.prev=null;
+				temp.next = null;
+				return head;
+			}else if(front==null) {
+				temp.prev = null;
+				back.next = null;
+				return head;
+			}else {
+				back.next = front;
+				front.prev = back;
+				temp.next = null;
+				temp.prev = null;
+			}
 		return head;
 	}
 	
@@ -119,12 +128,31 @@ public class Arr_to_ll {
 		Node prev = null;
 		while(temp!=null) {
 			if(temp.data==el) {
-				prev.next=prev.next.next;
 				break;
 			}
-			prev = temp;
 			temp = temp.next;
 		}
+		 Node back = temp.prev;
+		 Node front = temp.next;
+			
+			if(back==null&&front==null) {
+				return null;
+			}else if(back == null) {
+				head = temp.next;
+				front.prev=null;
+				temp.next = null;
+				return head;
+			}else if(front==null) {
+				temp.prev = null;
+				back.next = null;
+				return head;
+			}else {
+				back.next = front;
+				front.prev = back;
+				temp.next = null;
+				temp.prev = null;
+			}
+		
 		return head;
 	}
     
@@ -132,6 +160,7 @@ public class Arr_to_ll {
     	
     	Node temp = new Node(el);
     	temp.next = head;
+    	head.prev = temp;
     	
     	return temp;
     }
@@ -148,36 +177,60 @@ public class Arr_to_ll {
     		temp = temp.next;
     	}
     	
-    	temp.next = new Node(el);
+    	Node back = temp.prev;
+    	
+    	Node newNode = new Node(el);
+    	back.next = newNode; 
+    	newNode.prev = back;
+    	newNode.next = temp;
+    	temp.prev = newNode;
+    	temp.next = null;  
     	
     	return head;
     }
     
-    public static Node insertAtK(Node head,int k,int el) {
+    public static Node insertAtK(Node head,int p,int x) {
     	
-    	Node newNode = new Node(el);
+    	Node newNode = new Node(x);
     	
     	if(head == null) {
-    		if(k==1) return newNode;
+    		if(p==1) return newNode;
     		else return null;
     	}
 		
-		if(k==1) {
-			newNode.next = head;
-			return newNode;
-		}
+//		if(p==1) {
+//			newNode.next = head;
+//			return newNode;
+//		}
 		int cnt = 0;
 		Node temp = head;
-		Node prev = null;
 		while(temp!=null) {
 			cnt++;
-			if(cnt==k) {
-				prev.next=newNode;
-				newNode.next = temp;
+			if(cnt==p){
 				break;
 			}
-			prev = temp;
 			temp = temp.next;
+		}
+		
+		Node back = temp.prev;
+		Node front = temp.next;
+		if(back==null&&front==null) {
+			return newNode;
+		}else if(back == null) {
+			newNode.next = front;
+			front.prev = newNode;
+			temp.next = newNode;
+			newNode.prev = temp;
+			return temp;
+		}else if(front==null) {
+			temp.next = newNode;
+			newNode.prev = temp;
+			return head;
+		}else {
+			temp.next = newNode;
+			newNode.prev = temp;
+			front.prev = newNode;
+			newNode.next = front;			
 		}
 		return head;
     	
@@ -275,5 +328,6 @@ public class Arr_to_ll {
 		
 		System.out.println(head);
 	}
+	
 
 }
